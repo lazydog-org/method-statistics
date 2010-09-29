@@ -1,14 +1,16 @@
-package org.lazydog.utilities.ejbmonitor.mbean;
+package org.lazydog.ejbmonitor.mbean;
 
 import java.util.Date;
+import javax.management.MXBean;
 
 
 /**
- * Method statistics MXBean interface.
+ * Method statistics MXBean.
  * 
  * @author  Ron Rickard
  */
-public interface MethodStatisticsMXBean {
+@MXBean
+public interface MethodStatistics {
 
     /**
      * Add a failure.

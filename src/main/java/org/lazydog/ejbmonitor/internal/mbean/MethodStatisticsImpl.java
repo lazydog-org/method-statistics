@@ -1,6 +1,7 @@
-package org.lazydog.utilities.ejbmonitor.mbean;
+package org.lazydog.ejbmonitor.internal.mbean;
 
 import java.util.Date;
+import org.lazydog.ejbmonitor.mbean.MethodStatistics;
 
 
 /**
@@ -8,8 +9,7 @@ import java.util.Date;
  * 
  * @author  Ron Rickard
  */
-public class MethodStatistics
-       implements MethodStatisticsMXBean {
+public class MethodStatisticsImpl implements MethodStatistics {
 
     private int failures;
     private Date lastFailureTime;
