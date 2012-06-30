@@ -75,8 +75,7 @@ public class MethodStatisticsImpl implements MethodStatistics {
      */
     @Override
     public long getAverageSuccessDuration() {
-        return (this.successes != 0) ?
-               this.totalSuccessDuration / this.successes : 0;
+        return (this.successes != 0) ? this.totalSuccessDuration / this.successes : 0;
     }
 
     /**
@@ -174,7 +173,6 @@ public class MethodStatisticsImpl implements MethodStatistics {
      */
     @Override
     public void reset() {
-
         this.failures = 0;
         this.lastFailureTime = null;
         this.lastSuccessDuration = 0L;

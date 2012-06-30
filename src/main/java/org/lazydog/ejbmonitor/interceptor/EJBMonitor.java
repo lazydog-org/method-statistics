@@ -26,26 +26,18 @@ public class EJBMonitor {
      * 
      * @throws  MBeanException  if unable to get the method statistics MBean.
      */
-    private static MethodStatistics getMethodStatistics(String className, String methodName)
-            throws MBeanException {
-
-        // Declare.
-        MethodStatistics methodStatistics;
-        ObjectName objectName;
-        Hashtable<String,String> table;
+    private static MethodStatistics getMethodStatistics(String className, String methodName) throws MBeanException {
 
         // Set the properties table.
-        table = new Hashtable<String,String>();
+        Hashtable<String,String> table = new Hashtable<String,String>();
         table.put("ejb", className);
         table.put("method", methodName);
 
         // Register the method statistics MBean.
-        objectName = MBeanUtility.register(MethodStatistics.class, table);
+        ObjectName objectName = MBeanUtility.register(MethodStatistics.class, table);
 
         // Get the method statistics MBean.
-        methodStatistics = MBeanUtility.getMBean(MethodStatistics.class, objectName);
-
-        return methodStatistics;
+        return MBeanUtility.getMBean(MethodStatistics.class, objectName);
     }
 
     /**
@@ -61,7 +53,7 @@ public class EJBMonitor {
             // Add the failure to the method statistics MBean.
             getMethodStatistics(className, methodName).addFailure();
         }
-        catch(Exception e) {
+        catch (Exception e) {
             // Ignore.
         }
     }
@@ -80,7 +72,7 @@ public class EJBMonitor {
             // Add the success to the method statistics MBean.
             getMethodStatistics(className, methodName).addSuccess(duration);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             // Ignore.
         }
     }
@@ -95,40 +87,30 @@ public class EJBMonitor {
      * @throws  Exception  if the EJB method call throws an exception.
      */
     @AroundInvoke
-    public Object monitor(InvocationContext invocationContext)
-           throws Exception {
-        
-        // Declare.
-        String className;
-        String methodName;
-        Object result;
+    public Object monitor(InvocationContext invocationContext) throws Exception {
 
         // Initialize.
-        result = null;
+        Object result = null;
 
         // Get the EJB class and method names.
-        className = invocationContext.getMethod().getDeclaringClass().getName();
-        methodName = invocationContext.getMethod().getName();
+        String className = invocationContext.getMethod().getDeclaringClass().getName();
+        String methodName = invocationContext.getMethod().getName();
 
         try {
 
-            // Declare.
-            long duration;
-            long startTime;
-
             // Get the time the EJB method started.
-            startTime = System.currentTimeMillis();
+            long startTime = System.currentTimeMillis();
 
             // Invoke the EJB method.
             result = invocationContext.proceed();
 
             // Calculate the duration of the EJB method.
-            duration = System.currentTimeMillis() - startTime;
+            long duration = System.currentTimeMillis() - startTime;
 
             // Add the success to the statistics.
             addSuccess(className, methodName, duration);
         }
-        catch(Exception e) {
+        catch (Exception e) {
 
             // Add the failure to the statistics.
             addFailure(className, methodName);
