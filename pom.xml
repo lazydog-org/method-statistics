@@ -27,7 +27,7 @@
     <groupId>org.lazydog.mbean</groupId>
     <artifactId>method-statistics</artifactId>
     <packaging>jar</packaging>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4</version>
     <name>Method Statistics</name>
     <description>The method statistics JMX MBean is used to gather statistics about class methods.</description>
     <url>http://www.lazydog.org</url>
@@ -58,7 +58,8 @@
         <connection>scm:git:git@github.com:lazydog-org/method-statistics.git</connection>
         <developerConnection>scm:git:git@github.com:lazydog-org/method-statistics.git</developerConnection>
         <url>git@github.com:lazydog-org/method-statistics.git</url>
-    </scm>
+      <tag>v1.4</tag>
+  </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.6</maven.compiler.source>
